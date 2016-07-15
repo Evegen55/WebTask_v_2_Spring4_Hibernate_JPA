@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -85,7 +86,7 @@ public class Client implements Serializable {
     private String typeOfUser;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private List<BankAccount> bankAccountList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clientID")
     private List<CreditCards> creditCardsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
     private List<PaymentsHistory> paymentsHistoryList;

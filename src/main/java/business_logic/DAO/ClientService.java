@@ -5,7 +5,9 @@
  */
 package business_logic.DAO;
 
+import business_logic.DAO.interfaces.ClientInterface;
 import business_logic.entity.Client;
+import business_logic.entity.CreditCards;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -38,6 +40,18 @@ public class ClientService implements ClientInterface{
         } else {
             return null;  
         }    
+    }
+    
+    /**
+     * 
+     * @param client_id
+     * @return 
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<CreditCards> getAllCardsByClientID(int client_id) {
+        Client find = em.find(Client.class, client_id);
+        return find.getCreditCardsList();
     }
     
 }

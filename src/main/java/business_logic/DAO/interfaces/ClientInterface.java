@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business_logic.DAO;
+package business_logic.DAO.interfaces;
 
 import business_logic.entity.Client;
+import business_logic.entity.CreditCards;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import business_logic.entity.Client;
  */
 public interface ClientInterface {
     Client getClientByEmail(String email);
+    List<CreditCards> getAllCardsByClientID(int client_id);
 }

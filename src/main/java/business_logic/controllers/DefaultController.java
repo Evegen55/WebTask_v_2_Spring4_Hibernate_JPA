@@ -7,6 +7,8 @@ package business_logic.controllers;
 
 import business_logic.DAO.ClientService;
 import business_logic.entity.Client;
+import business_logic.entity.CreditCards;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -34,9 +36,11 @@ public class DefaultController {
        
        //===========================
        String email = "Lew@gmail.com";
-       ClientService clientService = appContext.getBean(
-            "jpaClientService", ClientService.class);
-       System.out.println("Find by email: " + clientService.getClientByEmail(email));
+       ClientService clientService = appContext.getBean("jpaClientService", ClientService.class);
+       Client client = clientService.getClientByEmail(email);
+       //System.out.println("Find by email: " + client);
+       List<CreditCards> list = clientService.getAllCardsByClientID(client.getClientID());
+       System.out.println("Find by email: " + list.get(0));
        //===========================
        
        return "index";
