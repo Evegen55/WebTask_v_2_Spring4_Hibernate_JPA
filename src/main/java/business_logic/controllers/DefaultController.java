@@ -31,7 +31,7 @@ public class DefaultController {
     
    @RequestMapping(value = "/index", method = RequestMethod.GET)
    public String index(ModelMap map) {
-       map.put("msg", "Hello Spring 4 Web MVC!");
+       //map.put("msg", "Hello Spring 4 Web MVC!");
        
        
        //===========================
@@ -40,7 +40,8 @@ public class DefaultController {
        Client client = clientService.getClientByEmail(email);
        //System.out.println("Find by email: " + client);
        List<CreditCards> list = clientService.getAllCardsByClientID(client.getClientID());
-       System.out.println("Find by email: " + list.get(0));
+       //System.out.println("Find by email: " + list.get(0));
+       map.put("msg1", list);
        //===========================
        
        return "index";
