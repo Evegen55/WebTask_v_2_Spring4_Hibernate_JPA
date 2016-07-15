@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Spring 4 Web MVC via Annotations</title>
+        <title>Spring 4 Web MVC via Annotations, persistence with Hibernate and MySQL server</title>
         <link rel="stylesheet" type="text/css" href="{cp}/resources/css/site.css" />
         <script src="${cp}/resources/js/js.js"></script>
     </head>
