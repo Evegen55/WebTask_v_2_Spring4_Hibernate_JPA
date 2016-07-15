@@ -84,13 +84,13 @@ public class Client implements Serializable {
     @Size(min = 1, max = 128)
     @Column(name = "typeOfUser")
     private String typeOfUser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clientID")
     private List<BankAccount> bankAccountList;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clientID")
     private List<CreditCards> creditCardsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientID")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clientID")
     private List<PaymentsHistory> paymentsHistoryList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficiarClienstID")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "beneficiarClienstID")
     private List<PaymentsHistory> paymentsHistoryList1;
 
     public Client() {

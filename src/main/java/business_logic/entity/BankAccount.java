@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -53,11 +54,11 @@ public class BankAccount implements Serializable {
     @JoinColumn(name = "client_ID", referencedColumnName = "client_ID")
     @ManyToOne(optional = false)
     private Client clientID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountID")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "accountID")
     private List<CreditCards> creditCardsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientAccountID")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clientAccountID")
     private List<PaymentsHistory> paymentsHistoryList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficiarAccountID")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "beneficiarAccountID")
     private List<PaymentsHistory> paymentsHistoryList1;
 
     public BankAccount() {
