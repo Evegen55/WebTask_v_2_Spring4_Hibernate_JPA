@@ -232,7 +232,10 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "business_logic.entity.Client[ clientID=" + clientID + " ]";
+        return "Client{" + "clientID=" + clientID + ", lastname=" + lastname + 
+                ", firstname=" + firstname + ", titleofcourtesy=" + titleofcourtesy + 
+                ", phone=" + phone + ", email=" + email + ", password=" + password + 
+                ", typeOfUser=" + typeOfUser + '}';
     }
     
 }

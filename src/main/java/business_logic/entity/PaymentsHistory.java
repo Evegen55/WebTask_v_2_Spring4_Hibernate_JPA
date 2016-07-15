@@ -136,7 +136,10 @@ public class PaymentsHistory implements Serializable {
 
     @Override
     public String toString() {
-        return "business_logic.entity.PaymentsHistory[ paymentID=" + paymentID + " ]";
-    }
+        return "PaymentsHistory{" + "paymentID=" + paymentID + ", amount=" + amount + 
+                ", clientAccountID=" + clientAccountID + ", beneficiarAccountID=" + 
+                beneficiarAccountID + ", clientID=" + clientID + ", beneficiarClienstID=" + 
+                beneficiarClienstID + '}';
+    }      
     
 }

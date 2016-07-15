@@ -154,7 +154,7 @@ public class BankAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "business_logic.entity.BankAccount[ accountID=" + accountID + " ]";
+        return "BankAccount{" + "accountID=" + accountID + ", currentBalance=" + currentBalance + ", status=" + status + ", clientID=" + clientID + '}';
     }
     
 }

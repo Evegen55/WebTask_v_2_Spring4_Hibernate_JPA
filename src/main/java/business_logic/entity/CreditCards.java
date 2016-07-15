@@ -162,7 +162,9 @@ public class CreditCards implements Serializable {
 
     @Override
     public String toString() {
-        return "business_logic.entity.CreditCards[ cardID=" + cardID + " ]";
+        return "CreditCards{" + "cardID=" + cardID + ", pan=" + pan + 
+                ", secureCode=" + secureCode + ", validDate=" + validDate + 
+                ", status=" + status + ", accountID=" + accountID + ", clientID=" + clientID + '}';
     }
-    
+           
 }
