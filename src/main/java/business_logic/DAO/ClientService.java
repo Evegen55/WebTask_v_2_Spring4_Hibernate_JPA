@@ -8,8 +8,6 @@ package business_logic.DAO;
 import business_logic.DAO.interfaces.ClientInterface;
 import business_logic.entity.Client;
 import business_logic.entity.CreditCards;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
