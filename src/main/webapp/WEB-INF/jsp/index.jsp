@@ -11,17 +11,8 @@
         <script src="${cp}/resources/js/js.js"></script>
     </head>
     <body>
-        <!-- <h4>Spring 4 Web MVC via Annotations</h4>
-        Spring says: <span class="blue">${msg}</span> -->
-        
-        
-        <table border="1">
-            <th>My Credit Cards</th>
-            <c:forEach items="${msg1}" var="card">
-            <tr>
-                <td><a>${card.pan}</a></td>
-            </tr>
-            </c:forEach>
-        </table>
+        <h4>Spring 4 Web MVC via Annotations</h4>
+        Spring says: <span class="blue">${msg}</span>
+        <a href="my cards.htm">Link to a list of cards</a>
     </body>
 </html>

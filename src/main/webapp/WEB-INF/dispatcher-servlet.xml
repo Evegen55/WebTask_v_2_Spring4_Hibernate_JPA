@@ -17,6 +17,7 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">DefaultController</prop>
+                <prop key="my cards.htm">ClientController</prop>
             </props>
         </property>
     </bean>
@@ -31,6 +32,12 @@
     -->
     <bean name="DefaultController"
           class="business_logic.controllers.DefaultController"/>
+    
+    <!--
+    The client controller with butch of methods.
+    -->
+    <bean name="ClientController"
+          class="business_logic.controllers.ClientController"/>
     
             
 
