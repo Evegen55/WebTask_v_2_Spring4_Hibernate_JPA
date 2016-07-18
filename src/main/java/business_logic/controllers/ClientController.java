@@ -30,9 +30,10 @@ public class ClientController {
     private ApplicationContext appContext;
     
     @RequestMapping(value = "/my cards", method = RequestMethod.GET)
-   public String my_cards(ModelMap map) {
+    public String my_cards(ModelMap map) {
        
-       String email = "Lew@gmail.com";
+       String email = "Lew@gmail.com"; //TODO get this from security context!
+       
        ClientService clientService = appContext.getBean("jpaClientService", ClientService.class);
        Client client = clientService.getClientByEmail(email);
        List<CreditCards> list = clientService.getAllCardsByClientID(client.getClientID());
