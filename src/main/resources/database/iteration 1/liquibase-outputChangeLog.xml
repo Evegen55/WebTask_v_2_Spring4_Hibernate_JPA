@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-1">
+        <createTable tableName="bankaccount">
+            <column autoIncrement="true" name="account_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currentBalance" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-2">
+        <createTable tableName="client">
+            <column autoIncrement="true" name="client_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastname" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="titleofcourtesy" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(24)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="typeOfUser" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-3">
+        <createTable tableName="clients_groups">
+            <column name="groups_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-4">
+        <createTable tableName="creditcards">
+            <column autoIncrement="true" name="card_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="account_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PAN" type="CHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="secureCode" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-5">
+        <createTable tableName="groups">
+            <column autoIncrement="true" name="groups_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(300)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-6">
+        <createTable tableName="paymentshistory">
+            <column name="payment_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="clientAccount_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiarClienst_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiarAccount_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-7">
+        <addPrimaryKey columnNames="payment_ID" constraintName="PRIMARY" tableName="paymentshistory"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-8">
+        <addUniqueConstraint columnNames="email" constraintName="SQL_PERSON_EMAIL_INDEX" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-9">
+        <addUniqueConstraint columnNames="client_ID" constraintName="SQL_PERSON_ID_INDEX" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-10">
+        <addUniqueConstraint columnNames="email" constraintName="email" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-11">
+        <addUniqueConstraint columnNames="email" constraintName="email" tableName="clients_groups"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-12">
+        <createIndex indexName="FK_bankAccount_client" tableName="bankaccount">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-13">
+        <createIndex indexName="FK_creditCards_bankAccount" tableName="creditcards">
+            <column name="account_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-14">
+        <createIndex indexName="FK_creditCards_client" tableName="creditcards">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-15">
+        <createIndex indexName="FK_paymentsHistory_bankAccount" tableName="paymentshistory">
+            <column name="clientAccount_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-16">
+        <createIndex indexName="FK_paymentsHistory_bankAccount1" tableName="paymentshistory">
+            <column name="beneficiarAccount_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-17">
+        <createIndex indexName="FK_paymentsHistory_client" tableName="paymentshistory">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-18">
+        <createIndex indexName="FK_paymentsHistory_client1" tableName="paymentshistory">
+            <column name="beneficiarClienst_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-19">
+        <createIndex indexName="SQL_PERSONGROUPS_ID_INDEX" tableName="clients_groups">
+            <column name="groups_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-20">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="bankaccount" constraintName="FK_bankAccount_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-21">
+        <addForeignKeyConstraint baseColumnNames="email" baseTableName="clients_groups" constraintName="FK_clients_groups_clients" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="email" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-22">
+        <addForeignKeyConstraint baseColumnNames="groups_ID" baseTableName="clients_groups" constraintName="FK_clients_groups_groups" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="groups_ID" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-23">
+        <addForeignKeyConstraint baseColumnNames="account_ID" baseTableName="creditcards" constraintName="FK_creditCards_bankAccount" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-24">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="creditcards" constraintName="FK_creditCards_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-25">
+        <addForeignKeyConstraint baseColumnNames="clientAccount_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_bankAccount" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-26">
+        <addForeignKeyConstraint baseColumnNames="beneficiarAccount_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_bankAccount1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-27">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-28">
+        <addForeignKeyConstraint baseColumnNames="beneficiarClienst_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_client1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065248798-29">
+        <createView fullDefinition="false" viewName="v_user_role">select `u`.`email` AS `email`,`g`.`name` AS `name`,`u`.`password` AS `password` from `paymentsdb_v_1_3_sqlexpress`.`client` `u` join `paymentsdb_v_1_3_sqlexpress`.`groups` `g` join `paymentsdb_v_1_3_sqlexpress`.`clients_groups` `ug` where ((`u`.`email` = `ug`.`email`) and (`g`.`groups_ID` = `ug`.`groups_ID`))</createView>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-1">
+        <createTable tableName="bankaccount">
+            <column autoIncrement="true" name="account_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currentBalance" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-2">
+        <createTable tableName="client">
+            <column autoIncrement="true" name="client_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastname" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="titleofcourtesy" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(24)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="typeOfUser" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-3">
+        <createTable tableName="clients_groups">
+            <column name="groups_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-4">
+        <createTable tableName="creditcards">
+            <column autoIncrement="true" name="card_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="account_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PAN" type="CHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="secureCode" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-5">
+        <createTable tableName="groups">
+            <column autoIncrement="true" name="groups_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(300)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-6">
+        <createTable tableName="paymentshistory">
+            <column name="payment_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="clientAccount_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiarClienst_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiarAccount_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-7">
+        <addPrimaryKey columnNames="payment_ID" constraintName="PRIMARY" tableName="paymentshistory"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-8">
+        <addUniqueConstraint columnNames="email" constraintName="SQL_PERSON_EMAIL_INDEX" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-9">
+        <addUniqueConstraint columnNames="client_ID" constraintName="SQL_PERSON_ID_INDEX" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-10">
+        <addUniqueConstraint columnNames="email" constraintName="email" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-11">
+        <addUniqueConstraint columnNames="email" constraintName="email" tableName="clients_groups"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-12">
+        <createIndex indexName="FK_bankAccount_client" tableName="bankaccount">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-13">
+        <createIndex indexName="FK_creditCards_bankAccount" tableName="creditcards">
+            <column name="account_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-14">
+        <createIndex indexName="FK_creditCards_client" tableName="creditcards">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-15">
+        <createIndex indexName="FK_paymentsHistory_bankAccount" tableName="paymentshistory">
+            <column name="clientAccount_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-16">
+        <createIndex indexName="FK_paymentsHistory_bankAccount1" tableName="paymentshistory">
+            <column name="beneficiarAccount_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-17">
+        <createIndex indexName="FK_paymentsHistory_client" tableName="paymentshistory">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-18">
+        <createIndex indexName="FK_paymentsHistory_client1" tableName="paymentshistory">
+            <column name="beneficiarClienst_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-19">
+        <createIndex indexName="SQL_PERSONGROUPS_ID_INDEX" tableName="clients_groups">
+            <column name="groups_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-20">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="bankaccount" constraintName="FK_bankAccount_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-21">
+        <addForeignKeyConstraint baseColumnNames="email" baseTableName="clients_groups" constraintName="FK_clients_groups_clients" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="email" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-22">
+        <addForeignKeyConstraint baseColumnNames="groups_ID" baseTableName="clients_groups" constraintName="FK_clients_groups_groups" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="groups_ID" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-23">
+        <addForeignKeyConstraint baseColumnNames="account_ID" baseTableName="creditcards" constraintName="FK_creditCards_bankAccount" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-24">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="creditcards" constraintName="FK_creditCards_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-25">
+        <addForeignKeyConstraint baseColumnNames="clientAccount_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_bankAccount" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-26">
+        <addForeignKeyConstraint baseColumnNames="beneficiarAccount_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_bankAccount1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-27">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-28">
+        <addForeignKeyConstraint baseColumnNames="beneficiarClienst_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_client1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065336797-29">
+        <createView fullDefinition="false" viewName="v_user_role">select `u`.`email` AS `email`,`g`.`name` AS `name`,`u`.`password` AS `password` from `paymentsdb_v_1_3_sqlexpress`.`client` `u` join `paymentsdb_v_1_3_sqlexpress`.`groups` `g` join `paymentsdb_v_1_3_sqlexpress`.`clients_groups` `ug` where ((`u`.`email` = `ug`.`email`) and (`g`.`groups_ID` = `ug`.`groups_ID`))</createView>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-1">
+        <createTable tableName="bankaccount">
+            <column autoIncrement="true" name="account_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currentBalance" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-2">
+        <createTable tableName="client">
+            <column autoIncrement="true" name="client_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="lastname" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="titleofcourtesy" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(24)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="typeOfUser" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-3">
+        <createTable tableName="clients_groups">
+            <column name="groups_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-4">
+        <createTable tableName="creditcards">
+            <column autoIncrement="true" name="card_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="account_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PAN" type="CHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="secureCode" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-5">
+        <createTable tableName="groups">
+            <column autoIncrement="true" name="groups_ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(300)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-6">
+        <createTable tableName="paymentshistory">
+            <column name="payment_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="clientAccount_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiarClienst_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beneficiarAccount_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-7">
+        <addPrimaryKey columnNames="payment_ID" constraintName="PRIMARY" tableName="paymentshistory"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-8">
+        <addUniqueConstraint columnNames="email" constraintName="SQL_PERSON_EMAIL_INDEX" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-9">
+        <addUniqueConstraint columnNames="client_ID" constraintName="SQL_PERSON_ID_INDEX" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-10">
+        <addUniqueConstraint columnNames="email" constraintName="email" tableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-11">
+        <addUniqueConstraint columnNames="email" constraintName="email" tableName="clients_groups"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-12">
+        <createIndex indexName="FK_bankAccount_client" tableName="bankaccount">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-13">
+        <createIndex indexName="FK_creditCards_bankAccount" tableName="creditcards">
+            <column name="account_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-14">
+        <createIndex indexName="FK_creditCards_client" tableName="creditcards">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-15">
+        <createIndex indexName="FK_paymentsHistory_bankAccount" tableName="paymentshistory">
+            <column name="clientAccount_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-16">
+        <createIndex indexName="FK_paymentsHistory_bankAccount1" tableName="paymentshistory">
+            <column name="beneficiarAccount_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-17">
+        <createIndex indexName="FK_paymentsHistory_client" tableName="paymentshistory">
+            <column name="client_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-18">
+        <createIndex indexName="FK_paymentsHistory_client1" tableName="paymentshistory">
+            <column name="beneficiarClienst_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-19">
+        <createIndex indexName="SQL_PERSONGROUPS_ID_INDEX" tableName="clients_groups">
+            <column name="groups_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-20">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="bankaccount" constraintName="FK_bankAccount_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-21">
+        <addForeignKeyConstraint baseColumnNames="email" baseTableName="clients_groups" constraintName="FK_clients_groups_clients" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="email" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-22">
+        <addForeignKeyConstraint baseColumnNames="groups_ID" baseTableName="clients_groups" constraintName="FK_clients_groups_groups" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="groups_ID" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-23">
+        <addForeignKeyConstraint baseColumnNames="account_ID" baseTableName="creditcards" constraintName="FK_creditCards_bankAccount" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-24">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="creditcards" constraintName="FK_creditCards_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-25">
+        <addForeignKeyConstraint baseColumnNames="clientAccount_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_bankAccount" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-26">
+        <addForeignKeyConstraint baseColumnNames="beneficiarAccount_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_bankAccount1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_ID" referencedTableName="bankaccount"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-27">
+        <addForeignKeyConstraint baseColumnNames="client_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_client" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-28">
+        <addForeignKeyConstraint baseColumnNames="beneficiarClienst_ID" baseTableName="paymentshistory" constraintName="FK_paymentsHistory_client1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_ID" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="Evgenii_Lartcev (generated)" id="1487065535733-29">
+        <createView fullDefinition="false" viewName="v_user_role">select `u`.`email` AS `email`,`g`.`name` AS `name`,`u`.`password` AS `password` from `paymentsdb_v_1_3_sqlexpress`.`client` `u` join `paymentsdb_v_1_3_sqlexpress`.`groups` `g` join `paymentsdb_v_1_3_sqlexpress`.`clients_groups` `ug` where ((`u`.`email` = `ug`.`email`) and (`g`.`groups_ID` = `ug`.`groups_ID`))</createView>
+    </changeSet>
+</databaseChangeLog>

@@ -4,3 +4,4 @@
 - [Apache Maven](https://maven.apache.org/)
 - [Spring 4](https://projects.spring.io/spring-framework/)
 - [Hibernate](http://hibernate.org/)
+- [Liquibase](http://www.liquibase.org)

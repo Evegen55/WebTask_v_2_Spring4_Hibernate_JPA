@@ -13,25 +13,27 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <liquibase_release>3.5.3</liquibase_release>
+        <spring_release>4.3.7.RELEASE</spring_release>
+        <spring_security>4.2.2.RELEASE</spring_security>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.0.RELEASE</version>
+            <version>${spring_release}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.3.1.RELEASE</version>
+            <version>${spring_release}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.3.0.RELEASE</version>
+            <version>${spring_release}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -43,17 +45,17 @@
         <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-context-support</artifactId>
-          <version>4.3.1.RELEASE</version>
+          <version>${spring_release}</version>
         </dependency>
         <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-aop</artifactId>
-          <version>4.3.1.RELEASE</version>
+          <version>${spring_release}</version>
         </dependency>
         <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-orm</artifactId>
-          <version>4.3.1.RELEASE</version>
+          <version>${spring_release}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
         <dependency>
@@ -80,7 +82,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>4.3.1.RELEASE</version>
+            <version>${spring_release}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
         <dependency>
@@ -92,17 +94,17 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>4.1.1.RELEASE</version>
+            <version>${spring_security}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.1.1.RELEASE</version>
+            <version>${spring_security}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>4.1.1.RELEASE</version>
+            <version>${spring_security}</version>
             <scope>runtime</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -111,13 +113,11 @@
 			<groupId>mysql</groupId>
 			<version>5.1.40</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-maven-plugin</artifactId>
 			<version>${liquibase_release}</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
 		<dependency>
 			<groupId>org.yaml</groupId>
@@ -172,6 +172,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <propertyFile>src/main/resources/database/liquibase.properties</propertyFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>
