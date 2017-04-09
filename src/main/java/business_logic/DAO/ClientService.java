@@ -33,11 +33,7 @@ public class ClientService implements ClientInterface{
         List<Client> resultList = em.createNamedQuery("Client.findByEmail")
                 .setParameter("email", email)
                 .getResultList();
-        if (resultList.size()>0) {
-            return resultList.get(0);
-        } else {
-            return null;  
-        }    
+        return resultList.size()>0 ? resultList.get(0) : null;
     }
     
     /**
