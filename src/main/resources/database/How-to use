@@ -1,0 +1,27 @@
+First command to generate changelog from existed database and store it:
+
+mvn liquibase:generateChangeLog
+
+Next, any other changes in a database must be only in an appropriate changelogs.
+
+See an EXAMPLE:
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog ...>
+    <changeSet author="John" id="1439227853089-1">
+        <dropColumn columnName="address" tableName="APP_USER"/>
+    </changeSet>
+</databaseChangeLog>
+
+When Liquibase reaches a changeSet, it computes a check sum and stores it in the “databasechangelog”.
+The value of storing the check sum is so that Liquibase can know if someone changed the changes in the changeSet since it was run.
+If the changeSet was changed since it was run, Liquibase will exit the migration with an error
+because it cannot know what was changed and the database may be in a state different than what the changeLog is expecting.
+If there was a valid reason for the changeSet to have been changed and you want to ignore this error,
+update the databasechangelog table so that the row with the corresponding id/author/filepath has a null value for the check sum.
+The next time Liquibase runs, it will update the check sum value to the new correct value
+
+Also see:
+https://kb.epam.com/display/BRDICMBRA/Use+database+migrations+tools+in+tumorportal
+http://www.baeldung.com/liquibase-refactor-schema-of-java-app
+http://www.liquibase.org/documentation/index.html

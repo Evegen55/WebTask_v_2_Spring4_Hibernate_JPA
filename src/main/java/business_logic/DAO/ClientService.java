@@ -8,42 +8,37 @@ package business_logic.DAO;
 import business_logic.DAO.interfaces.ClientInterface;
 import business_logic.entity.Client;
 import business_logic.entity.CreditCards;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
 /**
- *
  * @author student
  */
 @Service("jpaClientService")
 @Repository
 @Transactional
-public class ClientService implements ClientInterface{
+public class ClientService implements ClientInterface {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Transactional(readOnly = true)
     @Override
     public Client getClientByEmail(String email) {
-        List<Client> resultList = em.createNamedQuery("Client.findByEmail")
+        List<Client> resultList = em.createNamedQuery("Client.findByEmail", Client.class)
                 .setParameter("email", email)
                 .getResultList();
-        if (resultList.size()>0) {
-            return resultList.get(0);
-        } else {
-            return null;  
-        }    
+        return resultList.size() > 0 ? resultList.get(0) : null;
     }
-    
+
     /**
-     * 
      * @param client_id
-     * @return 
+     * @return
      */
     @Override
     @Transactional(readOnly = true)
@@ -51,5 +46,5 @@ public class ClientService implements ClientInterface{
         Client find = em.find(Client.class, client_id);
         return find.getCreditCardsList();
     }
-    
+
 }

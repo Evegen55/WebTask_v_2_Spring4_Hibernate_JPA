@@ -2,35 +2,29 @@
 <!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-       http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="business_logic"/>
-    
+
     <jee:jndi-lookup id="dataSource"
                      jndi-name="payments_v_1_3_glassfish"
                      expected-type="javax.sql.DataSource"/>
-    
+
     <bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-      <property name="dataSource" ref="dataSource" />
-      <property name="packagesToScan" value="business_logic.entity"/>
-      <property name="jpaVendorAdapter">
-          <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-      </property>
-      <property name="jpaProperties">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="business_logic.entity"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">
                     org.hibernate.dialect.MySQLDialect
@@ -41,17 +35,17 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.generate_statistics">true</prop>
             </props>
-       </property>
+        </property>
     </bean>
-    
+
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-      <property name="entityManagerFactory" ref="myEmf" />
-   </bean>
-    
-    <tx:annotation-driven />
-    
+        <property name="entityManagerFactory" ref="myEmf"/>
+    </bean>
+
+    <tx:annotation-driven/>
+
     <bean id="persistenceExceptionTranslationPostProcessor"
-      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-    
-       
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+
 </beans>
